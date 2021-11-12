@@ -36,7 +36,7 @@ class Story(StoryBase):
 
 class StoryOut(BaseModel):
     Story: Story
-
+    
     class Config:
         orm_mode = True
 

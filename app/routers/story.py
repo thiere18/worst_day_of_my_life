@@ -21,7 +21,7 @@ def get_stories(db: Session= Depends(get_db), skip: int = 0, limit: int = 100):
     return stories
 
 
-@router.get("/{id}", response_model=List[schemas.StoryOut])
+@router.get("/{id}", response_model=schemas.Story)
 def get_story(id: int, db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
     story = db.query(models.Story).filter(models.Story.id == id).first()
     if not story:

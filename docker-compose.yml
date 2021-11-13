@@ -9,9 +9,13 @@ services:
     ports:
       - 5431:5432
     environment:
-      - POSTGRES_USER=postgres
+      - POSTGRES_USER=postgres:latest
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=worst_day
+    networks:
+      worst:
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
 
   pgadmin:
     container_name: pgadmin
@@ -22,6 +26,8 @@ services:
 
     ports:
       - 5050:80
+    networks:
+      worst:
     depends_on:
       - db
 
@@ -33,6 +39,18 @@ services:
       - .:/app
     ports:
       - 8000:8000
+    links:
+      - db:db
+    networks:
+      worst:
+
     depends_on:
       - db
     restart: always
+
+volumes:
+  postgres-db:
+
+networks:
+  worst:
+

@@ -11,7 +11,7 @@ app = FastAPI(
     openapi_url="/api/v1/openapi.json"
 )
 
-models.Base.metadata.create_all(bind=engine)
+# models.Base.metadata.create_all(bind=engine)
 
 origins=['*']
 

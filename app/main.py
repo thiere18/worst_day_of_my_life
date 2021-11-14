@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from .routers import user,story,auth
 from .import models
+from fastapi.middleware.cors import CORSMiddleware
+
 from .database import engine 
 app = FastAPI(
     docs_url="/api/v1/docs",
@@ -10,6 +12,16 @@ app = FastAPI(
 )
 
 # models.Base.metadata.create_all(bind=engine)
+
+origins=['*']
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def root():
